@@ -1,0 +1,37 @@
+{
+  "name": "my-portfolio",
+  "version": "1.0.0",
+  "description": "app to track portfolio",
+  "engines": {
+    "node": ">= 7.6.0"
+  },
+  "now": {
+    "dotenv": "variables.env.now"
+  },
+  "scripts": {
+    "start": "node ./start.js",
+    "watch": "nodemon ./start.js",
+    "dev": "npm run watch",
+    "precommit": "npm run lint",
+    "lint": "eslint ./**"
+  },
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "dotenv": "^4.0.0",
+    "es6-promisify": "^5.0.0",
+    "express": "^4.15.3",
+    "express-validator": "^3.2.1",
+    "json-parser": "^1.1.5",
+    "mongoose": "^4.11.3",
+    "mongoose-mongodb-errors": "0.0.2",
+    "pug": "^2.0.0-rc.2",
+    "request": "^2.81.0"
+  },
+  "devDependencies": {
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb-base": "^11.2.0",
+    "eslint-plugin-import": "^2.7.0",
+    "husky": "^0.14.3",
+    "nodemon": "^1.11.0"
+  }
+}
