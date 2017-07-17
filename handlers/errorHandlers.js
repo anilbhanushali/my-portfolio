@@ -37,14 +37,9 @@ exports.developmentErrors = (err, req, res) => {
     status: err.status,
     stackHighlighted: err.stack.replace(/[a-z_-\d]+.js:\d+:\d+/gi, '<mark>$&</mark>'),
   };
-  res.status(err.status || 500);
-  res.format({
-    // Based on the `Accept` http header
-    'text/html': () => {
-      res.render('error', errorDetails);
-    }, // Form Submit, Reload the page
-    'application/json': () => res.json(errorDetails), // Ajax call, send JSON back
-  });
+  res
+    .status(err.status || 500)
+    .json(errorDetails);
 };
 
 
@@ -54,9 +49,15 @@ exports.developmentErrors = (err, req, res) => {
   No stacktraces are leaked to user
 */
 exports.productionErrors = (err, req, res) => {
-  res.status(err.status || 500);
-  res.render('error', {
+  err.stack = err.stack || '';
+  const errorDetails = {
     message: err.message,
-    error: {},
-  });
+    status: err.status,
+  };
+  res
+    .status(err.status || 500)
+    .json({
+      message: err.message,
+      error: errorDetails, // ← Remove this; TODO : Standardise error handleing and codes.
+    });
 };

@@ -14,7 +14,6 @@ mongoose.connection.on('error', (err) => {
 require('./models/Stock');
 require('./models/Trade');
 
-
 // Start our app!
 const app = require('./app');
 

@@ -15,8 +15,8 @@ exports.getReturns = async (req, res) => {
   const [stock, ltp] = await Promise.all([stockPromise, ltpPromise]);
   if (!stock) { throw Error('Stock not in portfolio'); }
   const cumulativeReturn = Math.round(
-        (ltp - stock.averagePrice) * stock.quantityAvailable * 100)
-        / 100;
+    (ltp - stock.averagePrice) * stock.quantityAvailable * 100)
+    / 100;
   return res.json({
     stock,
     return: cumulativeReturn,
@@ -32,3 +32,9 @@ exports.getPorfolio = async (req, res) => {
   const stocks = await Stock.find().populate('trades');
   return res.json(stocks);
 };
+
+/* eslint-disable arrow-body-style */
+exports.downloadCollection = async (req, res) => {
+  return res.render('index');
+};
+/* eslint-enable arrow-body-style */
