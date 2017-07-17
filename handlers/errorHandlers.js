@@ -24,13 +24,14 @@ exports.notFound = (req, res, next) => {
   next(err);
 };
 
+/* eslint-disable no-unused-vars */
 /*
   Development Error Hanlder
 
   In development we show good error messages so if we hit a syntax error
   or any other previously un-handled error, we can show good info on what happened
 */
-exports.developmentErrors = (err, req, res) => {
+exports.developmentErrors = (err, req, res, next) => {
   err.stack = err.stack || '';
   const errorDetails = {
     message: err.message,
@@ -48,7 +49,7 @@ exports.developmentErrors = (err, req, res) => {
 
   No stacktraces are leaked to user
 */
-exports.productionErrors = (err, req, res) => {
+exports.productionErrors = (err, req, res, next) => {
   err.stack = err.stack || '';
   const errorDetails = {
     message: err.message,
@@ -61,3 +62,4 @@ exports.productionErrors = (err, req, res) => {
       error: errorDetails, // ← Remove this; TODO : Standardise error handleing and codes.
     });
 };
+/* eslint-enable no-unused-vars */
